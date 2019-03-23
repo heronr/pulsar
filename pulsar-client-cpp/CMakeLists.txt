@@ -47,16 +47,21 @@ MESSAGE(STATUS "CMAKE_BUILD_TYPE:  " ${CMAKE_BUILD_TYPE})
 
 set(Boost_NO_BOOST_CMAKE ON)
 
-if (NOT CXX_STANDARD)
-    set(CXX_STANDARD "-std=c++11")
-endif(NOT CXX_STANDARD)
+if (NOT MSVC)
+    if (CXX_STANDARD)
+        add_compile_options(${CXX_STANDARD})
+    else()
+        add_compile_options(-std=c++11)
+    endif(CXX_STANDARD)
 
-if (NOT C_STANDARD)
-    set(C_STANDARD "-std=c11")
-endif(NOT C_STANDARD)
+    if (C_STANDARD)
+        add_compile_options(${C_STANDARD})
+    else()
+        add_compile_options(-std=c11)
+    endif(C_STANDARD)
 
-set(CMAKE_CXX_FLAGS " -msse4.2 -mpclmul -Werror=switch -Wno-deprecated-declarations ${CXX_STANDARD} ${CMAKE_CXX_FLAGS}")
-
+    add_compile_options(-msse4.2 -mpclmul -Werror=switch -Wno-deprecated-declarations)
+endif(NOT MSVC)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
