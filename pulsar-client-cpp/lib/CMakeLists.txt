@@ -43,6 +43,10 @@ target_link_libraries(pulsarShared ${COMMON_LIBS})
 
 add_library(pulsarStatic STATIC ${PULSAR_SOURCES} PulsarApi.pb.h PulsarApi.pb.cc)
 set_target_properties(pulsarStatic PROPERTIES OUTPUT_NAME ${LIB_NAME} VERSION ${LIBRARY_VERSION})
+if (MSVC)
+    target_compile_definitions(pulsarStatic PUBLIC NOGDI)
+    target_compile_options(pulsarStatic PUBLIC /wd4244 /wd4267)
+endif()
 
 # When linking statically, install a libpulsar.a that contains all the
 # required dependencies
@@ -50,11 +54,13 @@ if (LINK_STATIC)
     # Build a list of the requird .a libs to merge
     SET(STATIC_LIBS "")
     foreach (LIB IN LISTS COMMON_LIBS)
-        if (${LIB} MATCHES ".+\\.a")
+        if (${LIB} MATCHES ".+\\.(a|lib)")
             set(STATIC_LIBS "${STATIC_LIBS} ${LIB}")
         endif()
     endforeach()
 
+    if (MSVC)
+    else()
     add_custom_target(pulsarStaticWithDeps
             ALL
             BYPRODUCTS merged-library
@@ -62,6 +68,7 @@ if (LINK_STATIC)
             DEPENDS pulsarStatic
             WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
     install(FILES ../merged-library/libpulsar.a DESTINATION lib)
+    endif(MSVC)
 else()
     # Install regular libpulsar.a
     target_link_libraries(pulsarStatic ${COMMON_LIBS})

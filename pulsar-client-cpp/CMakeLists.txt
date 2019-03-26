@@ -80,7 +80,7 @@ if (LINK_STATIC)
 
     find_library(ZLIB_LIBRARY_PATH REQUIRED NAMES libz.a z zlib.lib)
     find_library(PROTOBUF_LIBRARIES NAMES libprotobuf-lite.a libprotobuf-lite.lib)
-    find_library(CURL_LIBRARY_PATH NAMES libcurl.a curl libcurl_a.lib)
+    find_library(CURL_LIBRARY_PATH NAMES curl libcurl_a)
     find_library(LIB_ZSTD NAMES libzstd.a)
 
     if (USE_LOG4CXX)
@@ -112,7 +112,7 @@ else()
     endif (NOT PROTOBUF_LIBRARIES)
 
     find_library(LIB_ZSTD zstd)
-    find_library(CURL_LIBRARY_PATH curl)
+    find_library(CURL_LIBRARY_PATH NAMES curl libcurl_a)
     if (USE_LOG4CXX)
         find_library(LOG4CXX_LIBRARY_PATH log4cxx)
         find_path(LOG4CXX_INCLUDE_PATH log4cxx/logger.h)
@@ -170,7 +170,7 @@ if (USE_LOG4CXX)
     find_path(LOG4CXX_INCLUDE_PATH log4cxx/logger.h)
 endif (USE_LOG4CXX)
 
-if (UNIX AND NOT APPLE)
+if (NOT APPLE AND NOT MSVC)
     # we don't set options below to build _pulsar.so
     set(CMAKE_CXX_FLAGS_PYTHON "${CMAKE_CXX_FLAGS}")
     # Hide all non-exported symbols to avoid conflicts
@@ -213,6 +213,14 @@ set(COMMON_LIBS
   pthread
 )
 
+if (NOT MSVC)
+    set(COMMON_LIBS
+    ${COMMON_LIBS} -lpthread -lm
+    dl
+    pthread
+    )
+endif()
+
 if (USE_LOG4CXX)
     set(COMMON_LIBS
       ${COMMON_LIBS}
@@ -230,7 +238,7 @@ endif ()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHAS_ZSTD=${HAS_ZSTD}")
 
-if(NOT APPLE)
+if(NOT APPLE AND NOT MSVC)
     set(COMMON_LIBS ${COMMON_LIBS} rt)
 endif ()
 
@@ -263,21 +271,23 @@ if (NOT APPLE)
     set(CLANG_FORMAT_VERSION "5.0")
 endif()
 
-find_package(ClangTools)
-set(BUILD_SUPPORT_DIR "${CMAKE_SOURCE_DIR}/build-support")
-add_custom_target(format ${BUILD_SUPPORT_DIR}/run_clang_format.py
-        ${CLANG_FORMAT_BIN}
-        0
-        ${BUILD_SUPPORT_DIR}/clang_format_exclusions.txt
-        ${CMAKE_SOURCE_DIR}/lib
-        ${CMAKE_SOURCE_DIR}/tests
-        ${CMAKE_SOURCE_DIR}/include)
+if (UNIX)
+    find_package(ClangTools)
+    set(BUILD_SUPPORT_DIR "${CMAKE_SOURCE_DIR}/build-support")
+    add_custom_target(format ${BUILD_SUPPORT_DIR}/run_clang_format.py
+            ${CLANG_FORMAT_BIN}
+            0
+            ${BUILD_SUPPORT_DIR}/clang_format_exclusions.txt
+            ${CMAKE_SOURCE_DIR}/lib
+            ${CMAKE_SOURCE_DIR}/tests
+            ${CMAKE_SOURCE_DIR}/include)
 
-# `make check-format` option (for CI test)
-add_custom_target(check-format ${BUILD_SUPPORT_DIR}/run_clang_format.py
-        ${CLANG_FORMAT_BIN}
-        1
-        ${BUILD_SUPPORT_DIR}/clang_format_exclusions.txt
-        ${CMAKE_SOURCE_DIR}/lib
-        ${CMAKE_SOURCE_DIR}/tests
-        ${CMAKE_SOURCE_DIR}/include)
+    # `make check-format` option (for CI test)
+    add_custom_target(check-format ${BUILD_SUPPORT_DIR}/run_clang_format.py
+            ${CLANG_FORMAT_BIN}
+            1
+            ${BUILD_SUPPORT_DIR}/clang_format_exclusions.txt
+            ${CMAKE_SOURCE_DIR}/lib
+            ${CMAKE_SOURCE_DIR}/tests
+            ${CMAKE_SOURCE_DIR}/include)
+endif()
