@@ -170,11 +170,11 @@ if (USE_LOG4CXX)
     find_path(LOG4CXX_INCLUDE_PATH log4cxx/logger.h)
 endif (USE_LOG4CXX)
 
-if (NOT APPLE)
+if (UNIX AND NOT APPLE)
     # we don't set options below to build _pulsar.so
     set(CMAKE_CXX_FLAGS_PYTHON "${CMAKE_CXX_FLAGS}")
     # Hide all non-exported symbols to avoid conflicts
-    set(CMAKE_CXX_FLAGS " -fvisibility=hidden -Wl,--exclude-libs,ALL ${CMAKE_CXX_FLAGS}")
+    add_compile_options(-fvisibility=hidden -Wl,--exclude-libs,ALL)
 endif ()
 
 if (LIB_ZSTD)
