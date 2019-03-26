@@ -23,7 +23,9 @@
 #include <zlib.h>
 
 // Make symbol visible to unit tests
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 
@@ -36,6 +38,8 @@ class CompressionCodecZLib : public CompressionCodec {
 
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif /* LIB_COMPRESSIONCODECZLIB_H_ */

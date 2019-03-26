@@ -26,7 +26,9 @@
 
 #include "MessageId.h"
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 namespace proto {
@@ -153,5 +155,7 @@ class Message {
 };
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 #endif /* MESSAGE_HPP_ */

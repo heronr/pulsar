@@ -21,7 +21,9 @@
 
 #include <string>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 
@@ -55,6 +57,8 @@ class Url {
 
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif /* LIB_URL_H_ */

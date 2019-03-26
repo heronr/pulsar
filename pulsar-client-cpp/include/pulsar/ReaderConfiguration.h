@@ -25,7 +25,9 @@
 #include <pulsar/Message.h>
 #include <pulsar/Schema.h>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 namespace pulsar {
 
 class Reader;
@@ -109,5 +111,7 @@ class ReaderConfiguration {
     std::shared_ptr<ReaderConfigurationImpl> impl_;
 };
 }  // namespace pulsar
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 #endif /* PULSAR_READER_CONFIGURATION_H_ */

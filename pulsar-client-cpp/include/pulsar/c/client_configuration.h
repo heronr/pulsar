@@ -23,7 +23,9 @@
 extern "C" {
 #endif
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 typedef enum { pulsar_DEBUG = 0, pulsar_INFO = 1, pulsar_WARN = 2, pulsar_ERROR = 3 } pulsar_logger_level_t;
 
@@ -141,7 +143,9 @@ void pulsar_client_configuration_set_validate_hostname(pulsar_client_configurati
 const unsigned int pulsar_client_configuration_get_stats_interval_in_seconds(
     pulsar_client_configuration_t *conf);
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #ifdef __cplusplus
 }

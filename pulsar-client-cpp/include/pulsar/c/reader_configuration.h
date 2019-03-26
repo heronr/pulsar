@@ -23,7 +23,9 @@
 extern "C" {
 #endif
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 typedef struct _pulsar_reader_configuration pulsar_reader_configuration_t;
 
@@ -84,7 +86,9 @@ void pulsar_reader_configuration_set_read_compacted(pulsar_reader_configuration_
 
 int pulsar_reader_configuration_is_read_compacted(pulsar_reader_configuration_t *configuration);
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #ifdef __cplusplus
 }

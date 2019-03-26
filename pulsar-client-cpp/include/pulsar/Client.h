@@ -29,7 +29,9 @@
 #include <pulsar/Schema.h>
 #include <string>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 typedef std::function<void(Result, Producer)> CreateProducerCallback;
@@ -214,6 +216,8 @@ class Client {
 };
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif /* PULSAR_CLIENT_HPP_ */

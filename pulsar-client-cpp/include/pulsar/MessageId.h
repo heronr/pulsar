@@ -23,7 +23,9 @@
 #include <stdint.h>
 #include <memory>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 
@@ -100,6 +102,8 @@ class MessageId {
 };
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif  // MESSAGE_ID_H

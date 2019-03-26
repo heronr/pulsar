@@ -25,7 +25,9 @@
 extern "C" {
 #endif
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 typedef struct _pulsar_topic_metadata pulsar_topic_metadata_t;
 
@@ -34,7 +36,9 @@ typedef int (*pulsar_message_router)(pulsar_message_t *msg, pulsar_topic_metadat
 
 int pulsar_topic_metadata_get_num_partitions(pulsar_topic_metadata_t *topicMetadata);
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #ifdef __cplusplus
 }

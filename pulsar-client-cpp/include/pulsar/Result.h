@@ -21,7 +21,9 @@
 
 #include <iosfwd>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 
@@ -85,6 +87,8 @@ const char* strResult(Result result);
 
 std::ostream& operator<<(std::ostream& s, pulsar::Result result);
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif /* ERROR_HPP_ */

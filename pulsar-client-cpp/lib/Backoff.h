@@ -23,7 +23,9 @@
 #include <algorithm>
 #include <time.h> /* time */
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 
@@ -47,6 +49,8 @@ class Backoff {
 };
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif  //_PULSAR_BACKOFF_HEADER_

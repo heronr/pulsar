@@ -25,7 +25,9 @@
 extern "C" {
 #endif
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 typedef struct _pulsar_reader pulsar_reader_t;
 
@@ -68,7 +70,9 @@ void pulsar_reader_free(pulsar_reader_t *reader);
 
 pulsar_result pulsar_reader_has_message_available(pulsar_reader_t *reader, int *available);
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #ifdef __cplusplus
 }

@@ -21,7 +21,9 @@
 
 #include <stdint.h>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 
@@ -31,6 +33,8 @@ uint32_t crc32cHw(uint32_t previousChecksum, const void *data, int length);
 uint32_t crc32cSw(uint32_t previousChecksum, const void *data, int length);
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif  // _CHECKSUM_PROVIDER_H_

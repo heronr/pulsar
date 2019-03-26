@@ -26,7 +26,9 @@
 #include <string>
 #include <map>
 #include <mutex>
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 namespace pulsar {
 
 class ExecutorService;
@@ -67,5 +69,7 @@ class ConnectionPool {
     friend class ConnectionPoolTest;
 };
 }  // namespace pulsar
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 #endif  //_PULSAR_CONNECTION_POOL_HEADER_

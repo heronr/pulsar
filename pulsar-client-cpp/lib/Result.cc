@@ -138,8 +138,12 @@ const char* pulsar::strResult(Result result) {
     return "UnknownErrorCode";
 }
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 std::ostream& operator<<(std::ostream& s, Result result) { return s << strResult(result); }
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif

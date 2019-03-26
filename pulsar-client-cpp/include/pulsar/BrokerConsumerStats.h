@@ -26,7 +26,9 @@
 #include <memory>
 #include <pulsar/ConsumerType.h>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 namespace pulsar {
 class BrokerConsumerStatsImplBase;
 class PulsarWrapper;
@@ -90,6 +92,8 @@ typedef std::function<void(Result result, BrokerConsumerStats brokerConsumerStat
     BrokerConsumerStatsCallback;
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif  // PULSAR_CPP_BROKERCONSUMERSTATS_H

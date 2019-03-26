@@ -23,7 +23,9 @@
 extern "C" {
 #endif
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 typedef struct _pulsar_authentication pulsar_authentication_t;
 
@@ -43,7 +45,9 @@ pulsar_authentication_t *pulsar_authentication_athenz_create(const char *authPar
 
 void pulsar_authentication_free(pulsar_authentication_t *authentication);
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #ifdef __cplusplus
 }

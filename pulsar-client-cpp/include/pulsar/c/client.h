@@ -35,7 +35,9 @@
 extern "C" {
 #endif
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 typedef struct _pulsar_client pulsar_client_t;
 typedef struct _pulsar_producer pulsar_producer_t;
@@ -150,7 +152,9 @@ void pulsar_client_close_async(pulsar_client_t *client, pulsar_close_callback ca
 
 void pulsar_client_free(pulsar_client_t *client);
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #ifdef __cplusplus
 }

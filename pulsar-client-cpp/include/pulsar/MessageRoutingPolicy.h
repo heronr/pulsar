@@ -24,7 +24,9 @@
 #include <pulsar/TopicMetadata.h>
 #include <memory>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 /*
  * Implement this interface to define custom policy giving message to
@@ -53,6 +55,8 @@ class MessageRoutingPolicy {
 typedef std::shared_ptr<MessageRoutingPolicy> MessageRoutingPolicyPtr;
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif  // PULSAR_MESSAGE_ROUTING_POLICY_HEADER_

@@ -19,7 +19,9 @@
 #ifndef TOPIC_METADATA_HPP_
 #define TOPIC_METADATA_HPP_
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 /**
@@ -33,6 +35,8 @@ class TopicMetadata {
 };
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif /* TOPIC_METADATA_HPP_ */

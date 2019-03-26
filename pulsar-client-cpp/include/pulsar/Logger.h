@@ -20,7 +20,9 @@
 
 #include <memory>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 
@@ -50,4 +52,6 @@ class LoggerFactory {
 
 typedef std::shared_ptr<LoggerFactory> LoggerFactoryPtr;
 }  // namespace pulsar
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif

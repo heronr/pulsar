@@ -23,7 +23,9 @@
 extern "C" {
 #endif
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 typedef struct _pulsar_string_map pulsar_string_map_t;
 
@@ -39,7 +41,9 @@ const char *pulsar_string_map_get(pulsar_string_map_t *map, const char *key);
 const char *pulsar_string_map_get_key(pulsar_string_map_t *map, int idx);
 const char *pulsar_string_map_get_value(pulsar_string_map_t *map, int idx);
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #ifdef __cplusplus
 }

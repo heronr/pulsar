@@ -23,7 +23,9 @@
 extern "C" {
 #endif
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 typedef struct _pulsar_string_list pulsar_string_list_t;
 
@@ -36,7 +38,9 @@ void pulsar_string_list_append(pulsar_string_list_t *list, const char *item);
 
 const char *pulsar_string_list_get(pulsar_string_list_t *map, int index);
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #ifdef __cplusplus
 }

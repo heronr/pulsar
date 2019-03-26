@@ -22,7 +22,9 @@
 #include <iostream>
 #include <map>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 
@@ -49,6 +51,8 @@ class EncryptionKeyInfoImpl {
 
 } /* namespace pulsar */
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif /* LIB_ENCRYPTIONKEYINFOIMPL_H_ */

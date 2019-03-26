@@ -26,7 +26,9 @@
 
 #include <list>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 typedef std::unique_lock<std::mutex> Lock;
 
@@ -154,6 +156,8 @@ class Void {};
 
 } /* namespace pulsar */
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif /* LIB_FUTURE_H_ */

@@ -29,7 +29,9 @@
 
 #include <set>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 
@@ -203,5 +205,7 @@ class ProducerConfiguration {
     std::shared_ptr<ProducerConfigurationImpl> impl_;
 };
 }  // namespace pulsar
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 #endif /* PULSAR_PRODUCERCONFIGURATION_H_ */

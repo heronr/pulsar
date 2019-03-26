@@ -26,7 +26,9 @@
 #include <pulsar/Result.h>
 #include <functional>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 
@@ -169,6 +171,8 @@ class AuthAthenz : public Authentication {
 
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif /* PULSAR_AUTHENTICATION_H_ */

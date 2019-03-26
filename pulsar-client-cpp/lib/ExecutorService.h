@@ -27,7 +27,9 @@
 #include <boost/noncopyable.hpp>
 #include <mutex>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 typedef std::shared_ptr<boost::asio::ip::tcp::socket> SocketPtr;
@@ -95,6 +97,8 @@ class ExecutorServiceProvider {
 typedef std::shared_ptr<ExecutorServiceProvider> ExecutorServiceProviderPtr;
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif  //_PULSAR_EXECUTOR_SERVICE_HEADER_

@@ -23,7 +23,9 @@
 extern "C" {
 #endif
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 typedef enum {
     pulsar_result_Ok,  /// Operation successful
@@ -78,7 +80,9 @@ typedef enum {
 // Return string representation of result code
 const char *pulsar_result_str(pulsar_result result);
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #ifdef __cplusplus
 }

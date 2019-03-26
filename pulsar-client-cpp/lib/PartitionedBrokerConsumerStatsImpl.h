@@ -27,7 +27,9 @@
 #include <boost/date_time/microsec_time_clock.hpp>
 #include <lib/BrokerConsumerStatsImpl.h>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 namespace pulsar {
 class PartitionedBrokerConsumerStatsImpl : public BrokerConsumerStatsImplBase {
    private:
@@ -87,5 +89,7 @@ class PartitionedBrokerConsumerStatsImpl : public BrokerConsumerStatsImplBase {
 };
 typedef std::shared_ptr<PartitionedBrokerConsumerStatsImpl> PartitionedBrokerConsumerStatsPtr;
 }  // namespace pulsar
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 #endif  // PULSAR_CPP_BROKERCONSUMERSTATSIMPL_H

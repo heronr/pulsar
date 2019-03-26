@@ -22,7 +22,9 @@
 #include <pulsar/Message.h>
 #include <pulsar/ReaderConfiguration.h>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 class PulsarWrapper;
@@ -95,6 +97,8 @@ class Reader {
 };
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif /* PULSAR_READER_HPP_ */

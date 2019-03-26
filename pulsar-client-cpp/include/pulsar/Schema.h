@@ -23,7 +23,9 @@
 #include <iosfwd>
 #include <memory>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 
@@ -157,4 +159,6 @@ class SchemaInfo {
 
 std::ostream &operator<<(std::ostream &s, pulsar::SchemaType schemaType);
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif

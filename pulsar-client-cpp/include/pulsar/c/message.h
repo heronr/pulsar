@@ -28,7 +28,9 @@ extern "C" {
 
 #include "string_map.h"
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 typedef struct _pulsar_message pulsar_message_t;
 typedef struct _pulsar_message_id pulsar_message_id_t;
@@ -169,7 +171,9 @@ uint64_t pulsar_message_get_event_timestamp(pulsar_message_t *message);
 
 const char *pulsar_message_get_topic_name(pulsar_message_t *message);
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #ifdef __cplusplus
 }

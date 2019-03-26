@@ -23,7 +23,9 @@
 #include <memory>
 #include <stdint.h>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 class ProducerImplBase;
@@ -151,6 +153,8 @@ class Producer {
 };
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif /* PRODUCER_HPP_ */

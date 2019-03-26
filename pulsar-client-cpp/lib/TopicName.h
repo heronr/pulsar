@@ -26,7 +26,9 @@
 #include <curl/curl.h>
 #include <mutex>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 class TopicName : public ServiceUnitId {
@@ -70,6 +72,8 @@ typedef std::shared_ptr<TopicName> TopicNamePtr;
 }  // namespace pulsar
 // end of namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif  //_PULSAR_TOPIC_NAME_HEADER_

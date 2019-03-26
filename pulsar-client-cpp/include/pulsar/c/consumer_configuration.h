@@ -24,7 +24,9 @@
 extern "C" {
 #endif
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 typedef struct _pulsar_consumer_configuration pulsar_consumer_configuration_t;
 
@@ -212,7 +214,9 @@ void pulsar_consumer_configuration_set_property(pulsar_consumer_configuration_t 
 // setCryptoFailureAction(ConsumerCryptoFailureAction
 // action);
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #ifdef __cplusplus
 }

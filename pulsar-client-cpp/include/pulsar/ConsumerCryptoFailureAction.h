@@ -19,7 +19,9 @@
 #ifndef CONSUMERCRYPTOFAILUREACTION_H_
 #define CONSUMERCRYPTOFAILUREACTION_H_
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 
@@ -35,6 +37,8 @@ enum class ConsumerCryptoFailureAction
 
 } /* namespace pulsar */
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif /* CONSUMERCRYPTOFAILUREACTION_H_ */

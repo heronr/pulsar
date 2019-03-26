@@ -26,7 +26,9 @@
 #include <lib/LookupService.h>
 #include <mutex>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 class LookupDataResult;
@@ -77,6 +79,8 @@ class BinaryProtoLookupService : public LookupService {
 typedef std::shared_ptr<BinaryProtoLookupService> BinaryProtoLookupServicePtr;
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif  //_PULSAR_BINARY_LOOKUP_SERVICE_HEADER_

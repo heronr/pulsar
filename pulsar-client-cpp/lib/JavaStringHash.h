@@ -25,7 +25,9 @@
 #include <string>
 #include <boost/functional/hash.hpp>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 namespace pulsar {
 class JavaStringHash : public Hash {
    public:
@@ -33,5 +35,7 @@ class JavaStringHash : public Hash {
     int32_t makeHash(const std::string &key);
 };
 }  // namespace pulsar
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 #endif /* JAVA_DEFAULT_HASH_HPP_ */

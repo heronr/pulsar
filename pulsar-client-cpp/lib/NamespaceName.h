@@ -24,7 +24,9 @@
 #include <memory>
 #include <string>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 namespace pulsar {
 
 class NamespaceName : public ServiceUnitId {
@@ -55,6 +57,8 @@ class NamespaceName : public ServiceUnitId {
 typedef std::shared_ptr<NamespaceName> NamespaceNamePtr;
 
 }  // namespace pulsar
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif

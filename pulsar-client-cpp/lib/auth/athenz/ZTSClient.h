@@ -20,7 +20,9 @@
 #include <map>
 #include <lib/LogUtils.h>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 
@@ -63,4 +65,6 @@ class ZTSClient {
     friend class ZTSClientWrapper;
 };
 }  // namespace pulsar
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif

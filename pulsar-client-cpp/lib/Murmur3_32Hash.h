@@ -29,7 +29,9 @@
 #include <cstdint>
 #include <string>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 namespace pulsar {
 
 class Murmur3_32Hash : public Hash {
@@ -48,6 +50,8 @@ class Murmur3_32Hash : public Hash {
     uint32_t makeHash(const void* key, const int64_t len);
 };
 }  // namespace pulsar
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif /* MURMUR3_32_HASH_HPP_ */

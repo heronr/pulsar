@@ -25,7 +25,9 @@
 #include <string>
 #include <boost/functional/hash.hpp>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 namespace pulsar {
 class BoostHash : public Hash {
    public:
@@ -36,5 +38,7 @@ class BoostHash : public Hash {
     boost::hash<std::string> hash;
 };
 }  // namespace pulsar
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 #endif /* BOOST_HASH_HPP_ */

@@ -27,7 +27,9 @@
 #include <map>
 
 // Make symbol visible to unit tests
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 using namespace pulsar;
 namespace pulsar {
@@ -89,6 +91,8 @@ class CompressionCodecNone : public CompressionCodec {
 };
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif /* LIB_COMPRESSIONCODEC_H_ */

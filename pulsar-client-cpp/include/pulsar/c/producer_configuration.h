@@ -27,7 +27,9 @@
 extern "C" {
 #endif
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 typedef enum {
     pulsar_UseSinglePartition,
@@ -147,7 +149,9 @@ void pulsar_producer_configuration_set_property(pulsar_producer_configuration_t 
 // int isEncryptionEnabled() const;
 // ProducerConfiguration &addEncryptionKey(std::string key);
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #ifdef __cplusplus
 }

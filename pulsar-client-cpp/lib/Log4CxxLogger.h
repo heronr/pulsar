@@ -23,7 +23,9 @@
 
 #ifdef USE_LOG4CXX
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 
@@ -36,6 +38,8 @@ class Log4CxxLoggerFactory : public LoggerFactory {
 };
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif

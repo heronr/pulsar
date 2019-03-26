@@ -22,7 +22,9 @@
 #include <stdexcept>
 #include <string>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 namespace pulsar {
 class DeprecatedException : public std::runtime_error {
@@ -34,6 +36,8 @@ class DeprecatedException : public std::runtime_error {
 };
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #endif  // DEPRECATED_EXCEPTION_HPP_

@@ -27,7 +27,11 @@
 
 namespace pulsar {
 
+#ifdef __GNUC__
 #define PULSAR_UNLIKELY(expr) __builtin_expect(expr, 0)
+#else
+#define PULSAR_UNLIKELY(expr) (expr)
+#endif
 
 #define DECLARE_LOG_OBJECT()                                                                     \
     static pulsar::Logger* logger() {                                                            \
@@ -77,7 +81,9 @@ namespace pulsar {
         }                                                             \
     }
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 class LogUtils {
    public:
@@ -90,5 +96,7 @@ class LogUtils {
     static std::string getLoggerName(const std::string& path);
 };
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 }  // namespace pulsar

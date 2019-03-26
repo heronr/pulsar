@@ -28,7 +28,9 @@ extern "C" {
 
 #include <stdint.h>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 typedef struct _pulsar_producer pulsar_producer_t;
 
@@ -122,7 +124,9 @@ void pulsar_producer_flush_async(pulsar_producer_t *producer, pulsar_flush_callb
 
 void pulsar_producer_free(pulsar_producer_t *producer);
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #ifdef __cplusplus
 }

@@ -22,7 +22,9 @@
 #include <map>
 #include <memory>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 std::ostream &operator<<(std::ostream &s, pulsar::SchemaType schemaType) {
     return s << strSchemaType(schemaType);
@@ -99,4 +101,6 @@ const std::map<std::string, std::string> &SchemaInfo::getProperties() const { re
 
 }  // namespace pulsar
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif

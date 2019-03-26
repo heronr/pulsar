@@ -29,7 +29,9 @@
 #include <pulsar/CryptoKeyReader.h>
 #include <pulsar/InitialPosition.h>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 namespace pulsar {
 
 class Consumer;
@@ -244,5 +246,7 @@ class ConsumerConfiguration {
     std::shared_ptr<ConsumerConfigurationImpl> impl_;
 };
 }  // namespace pulsar
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 #endif /* PULSAR_CONSUMERCONFIGURATION_H_ */

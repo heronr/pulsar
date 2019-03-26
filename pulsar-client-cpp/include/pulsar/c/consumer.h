@@ -27,7 +27,9 @@ extern "C" {
 
 #include <stdint.h>
 
+#ifdef __GNUC__
 #pragma GCC visibility push(default)
+#endif
 
 typedef struct _pulsar_consumer pulsar_consumer_t;
 
@@ -225,7 +227,9 @@ void pulsar_consumer_seek_async(pulsar_consumer_t *consumer, pulsar_message_id_t
 
 pulsar_result pulsar_consumer_seek(pulsar_consumer_t *consumer, pulsar_message_id_t *messageId);
 
+#ifdef __GNUC__
 #pragma GCC visibility pop
+#endif
 
 #ifdef __cplusplus
 }
