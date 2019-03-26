@@ -22,11 +22,14 @@ file(GLOB PULSAR_SOURCES *.cc lz4/*.c checksum/*.cc stats/*.cc c/*.cc auth/*.cc 
 execute_process(COMMAND python ../src/get-project-version.py OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE PV)
 set (CMAKE_CXX_FLAGS " ${CMAKE_CXX_FLAGS} -D_PULSAR_VERSION_=\\\"${PV}\\\"")
 
+if (NOT PROTOC_PATH)
+    set(PROTOC_PATH protoc)
+endif()
 # Protobuf generation is only supported natively starting from CMake 3.8
 # Using custom command for now
 ADD_CUSTOM_COMMAND(
          OUTPUT PulsarApi.pb.h PulsarApi.pb.cc
-         COMMAND protoc -I ../../pulsar-common/src/main/proto ../../pulsar-common/src/main/proto/PulsarApi.proto --cpp_out=${CMAKE_SOURCE_DIR}/lib
+         COMMAND ${PROTOC_PATH} -I ../../pulsar-common/src/main/proto ../../pulsar-common/src/main/proto/PulsarApi.proto --cpp_out=${CMAKE_SOURCE_DIR}/lib
          DEPENDS
          ../../pulsar-common/src/main/proto/PulsarApi.proto
          WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
@@ -44,7 +47,6 @@ target_link_libraries(pulsarShared ${COMMON_LIBS})
 add_library(pulsarStatic STATIC ${PULSAR_SOURCES} PulsarApi.pb.h PulsarApi.pb.cc)
 set_target_properties(pulsarStatic PROPERTIES OUTPUT_NAME ${LIB_NAME} VERSION ${LIBRARY_VERSION})
 if (MSVC)
-    target_compile_definitions(pulsarStatic PUBLIC NOGDI)
     target_compile_options(pulsarStatic PUBLIC /wd4244 /wd4267)
 endif()
 

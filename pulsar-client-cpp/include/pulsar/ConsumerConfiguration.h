@@ -44,7 +44,7 @@ typedef std::function<void(Result, const Message& msg)> ReceiveCallback;
 /// Callback definition for MessageListener
 typedef std::function<void(Consumer consumer, const Message& msg)> MessageListener;
 
-class ConsumerConfigurationImpl;
+struct ConsumerConfigurationImpl;
 
 /**
  * Class specifying the configuration of a consumer.

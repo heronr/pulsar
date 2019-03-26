@@ -61,6 +61,8 @@ if (NOT MSVC)
     endif(C_STANDARD)
 
     add_compile_options(-msse4.2 -mpclmul -Werror=switch -Wno-deprecated-declarations)
+else()
+    add_compile_definitions(WIN32_LEAN_AND_MEAN NOGDI _WIN32_WINNT=0x0501)
 endif(NOT MSVC)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)

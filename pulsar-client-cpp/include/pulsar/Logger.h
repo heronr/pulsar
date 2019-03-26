@@ -19,6 +19,7 @@
 #pragma once
 
 #include <memory>
+#include <string>
 
 #ifdef __GNUC__
 #pragma GCC visibility push(default)
