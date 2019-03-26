@@ -78,9 +78,9 @@ if (LINK_STATIC)
     SET(Boost_USE_STATIC_LIBS   ON)
     SET(OPENSSL_USE_STATIC_LIBS TRUE)
 
-    find_library(ZLIB_LIBRARY_PATH REQUIRED NAMES libz.a z)
-    find_library(PROTOBUF_LIBRARIES NAMES libprotobuf-lite.a)
-    find_library(CURL_LIBRARY_PATH NAMES libcurl.a curl)
+    find_library(ZLIB_LIBRARY_PATH REQUIRED NAMES libz.a z zlib.lib)
+    find_library(PROTOBUF_LIBRARIES NAMES libprotobuf-lite.a libprotobuf-lite.lib)
+    find_library(CURL_LIBRARY_PATH NAMES libcurl.a curl libcurl_a.lib)
     find_library(LIB_ZSTD NAMES libzstd.a)
 
     if (USE_LOG4CXX)
