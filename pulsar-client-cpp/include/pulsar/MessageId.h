@@ -22,6 +22,7 @@
 #include <iosfwd>
 #include <stdint.h>
 #include <memory>
+#include <string>
 
 #ifdef __GNUC__
 #pragma GCC visibility push(default)

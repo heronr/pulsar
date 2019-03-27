@@ -38,7 +38,7 @@ namespace pulsar {
 typedef std::function<void(Result, const Message& msg)> SendCallback;
 typedef std::function<void(Result)> CloseCallback;
 
-class ProducerConfigurationImpl;
+struct ProducerConfigurationImpl;
 class PulsarWrapper;
 
 /**

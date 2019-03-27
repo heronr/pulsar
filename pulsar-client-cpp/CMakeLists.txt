@@ -62,7 +62,7 @@ if (NOT MSVC)
 
     add_compile_options(-msse4.2 -mpclmul -Werror=switch -Wno-deprecated-declarations)
 else()
-    add_compile_definitions(WIN32_LEAN_AND_MEAN NOGDI _WIN32_WINNT=0x0501)
+    add_definitions(-DWIN32_LEAN_AND_MEAN -DNOGDI -D_WIN32_WINNT=0x0501)
 endif(NOT MSVC)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -80,11 +80,6 @@ if (LINK_STATIC)
     SET(Boost_USE_STATIC_LIBS   ON)
     SET(OPENSSL_USE_STATIC_LIBS TRUE)
 
-    find_library(ZLIB_LIBRARY_PATH REQUIRED NAMES libz.a z zlib.lib)
-    find_library(PROTOBUF_LIBRARIES NAMES libprotobuf-lite.a libprotobuf-lite.lib)
-    find_library(CURL_LIBRARY_PATH NAMES curl libcurl_a)
-    find_library(LIB_ZSTD NAMES libzstd.a)
-
     if (USE_LOG4CXX)
         if (LOG4CXX_USE_DYNAMIC_LIBS)
             find_library(LOG4CXX_LIBRARY_PATH log4cxx)
@@ -92,11 +87,11 @@ if (LINK_STATIC)
             find_library(LOG4CXX_LIBRARY_PATH NAMES liblog4cxx.a)
 
             # Libraries needed by log4cxx to link statically with
-            find_library(APR_LIBRARY_PATH NAMES libapr-1.a PATHS /usr/lib /usr/local/apr/lib /usr/local/opt/apr/libexec/lib/)
-            find_library(APR_UTIL_LIBRARY_PATH NAMES libaprutil-1.a PATHS /usr/lib /usr/local/apr/lib /usr/local/opt/apr-util/libexec/lib/)
-            find_library(EXPAT_LIBRARY_PATH NAMES libexpat.a expat)
+            find_library(APR_LIBRARY_PATH NAMES libapr-1 PATHS /usr/lib /usr/local/apr/lib /usr/local/opt/apr/libexec/lib/)
+            find_library(APR_UTIL_LIBRARY_PATH NAMES libaprutil-1 PATHS /usr/lib /usr/local/apr/lib /usr/local/opt/apr-util/libexec/lib/)
+            find_library(EXPAT_LIBRARY_PATH NAMES libexpat expat)
             if (APPLE)
-                find_library(ICONV_LIBRARY_PATH NAMES libiconv.a iconv)
+                find_library(ICONV_LIBRARY_PATH NAMES libiconv iconv)
             else ()
                 set(ICONV_LIBRARY_PATH )
             endif (APPLE)
@@ -104,17 +99,6 @@ if (LINK_STATIC)
     endif (USE_LOG4CXX)
 else()
     # Link to shared libraries
-    find_package(ZLIB REQUIRED)
-    set(ZLIB_LIBRARY_PATH ${ZLIB_LIBRARIES})
-    if (NOT PROTOBUF_LIBRARIES)
-      find_package(ProtoBuf QUIET)
-      if (NOT ProtoBuf_FOUND)
-        find_library(PROTOBUF_LIBRARIES protobuf-lite)
-      endif (NOT ProtoBuf_FOUND)
-    endif (NOT PROTOBUF_LIBRARIES)
-
-    find_library(LIB_ZSTD zstd)
-    find_library(CURL_LIBRARY_PATH NAMES curl libcurl_a)
     if (USE_LOG4CXX)
         find_library(LOG4CXX_LIBRARY_PATH log4cxx)
         find_path(LOG4CXX_INCLUDE_PATH log4cxx/logger.h)
@@ -122,6 +106,22 @@ else()
 endif (LINK_STATIC)
 
 find_package(Boost REQUIRED COMPONENTS program_options regex system)
+
+find_package(ZLIB REQUIRED)
+
+find_package(ProtoBuf QUIET)
+if (NOT ProtoBuf_FOUND)
+    find_library(ProtoBuf_LIBRARIES protobuf-lite libprotobuf-lite)
+    find_path(ProtoBuf_INCLUDE_DIRS google/protobuf/stubs/common.h)
+endif (NOT ProtoBuf_FOUND)
+
+find_package(CURL QUIET)
+if (NOT CURL_FOUND)
+    find_library(CURL_LIBRARIES NAMES curl libcurl_a)
+    find_path(CURL_INCLUDE_DIRS curl/curl.h)
+endif()
+
+find_library(LIB_ZSTD zstd libzstd)
 
 if (BUILD_PYTHON_WRAPPER)
     find_package(PythonLibs REQUIRED)
@@ -195,24 +195,23 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/include
   ${Boost_INCLUDE_DIR}
   ${OPENSSL_INCLUDE_DIR}
-  ${ZLIB_INCLUDE_DIR}
-  ${PROTOBUF_INCLUDE_DIR}
+  ${ZLIB_INCLUDE_DIRS}
+  ${CURL_INCLUDE_DIRS}
+  ${ProtoBuf_INCLUDE_DIRS}
   ${LOG4CXX_INCLUDE_PATH}
   ${GTEST_INCLUDE_PATH}
   ${GMOCK_INCLUDE_PATH}
 )
 
 set(COMMON_LIBS
-  ${COMMON_LIBS} -lpthread -lm
+  ${COMMON_LIBS}
   ${Boost_REGEX_LIBRARY}
   ${Boost_SYSTEM_LIBRARY}
-  ${CURL_LIBRARY_PATH}
+  ${CURL_LIBRARIES}
   ${OPENSSL_LIBRARIES}
-  ${ZLIB_LIBRARY_PATH}
-  ${PROTOBUF_LIBRARIES}
+  ${ZLIB_LIBRARIES}
+  ${ProtoBuf_LIBRARIES}
   ${ADDITIONAL_LIBRARIES}
-  dl
-  pthread
 )
 
 if (NOT MSVC)
@@ -238,7 +237,7 @@ if (HAS_ZSTD)
     set(COMMON_LIBS ${COMMON_LIBS} ${LIB_ZSTD} )
 endif ()
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DHAS_ZSTD=${HAS_ZSTD}")
+add_definitions(-DHAS_ZSTD=${HAS_ZSTD})
 
 if(NOT APPLE AND NOT MSVC)
     set(COMMON_LIBS ${COMMON_LIBS} rt)

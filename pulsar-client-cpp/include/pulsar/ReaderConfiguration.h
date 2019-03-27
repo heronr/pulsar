@@ -39,7 +39,7 @@ typedef std::function<void(Result result)> ResultCallback;
 /// Callback definition for MessageListener
 typedef std::function<void(Reader reader, const Message& msg)> ReaderListener;
 
-class ReaderConfigurationImpl;
+struct ReaderConfigurationImpl;
 
 /**
  * Class specifying the configuration of a consumer.

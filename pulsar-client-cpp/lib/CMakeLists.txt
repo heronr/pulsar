@@ -47,7 +47,7 @@ target_link_libraries(pulsarShared ${COMMON_LIBS})
 add_library(pulsarStatic STATIC ${PULSAR_SOURCES} PulsarApi.pb.h PulsarApi.pb.cc)
 set_target_properties(pulsarStatic PROPERTIES OUTPUT_NAME ${LIB_NAME} VERSION ${LIBRARY_VERSION})
 if (MSVC)
-    target_compile_options(pulsarStatic PUBLIC /wd4244 /wd4267)
+    target_compile_options(pulsarStatic PUBLIC /wd4244 /wd4267 /wd4018 /wd4715)
 endif()
 
 # When linking statically, install a libpulsar.a that contains all the
