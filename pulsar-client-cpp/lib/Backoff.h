@@ -44,7 +44,9 @@ class Backoff {
     TimeDuration mandatoryStop_;
     boost::posix_time::ptime firstBackoffTime_;
     bool mandatoryStopMade_;
+#ifndef _MSC_VER
     unsigned int randomSeed_;
+#endif
     friend class PulsarFriend;
 };
 }  // namespace pulsar

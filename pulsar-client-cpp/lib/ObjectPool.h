@@ -195,8 +195,10 @@ thread_local std::unique_ptr<typename Allocator<Type, MaxSize>::Impl> Allocator<
 template <typename Type, int MaxSize>
 std::mutex Allocator<Type, MaxSize>::Impl::mutex_;
 
+#ifndef _MSC_VER
 template <typename Type, int MaxSize>
 struct Allocator<Type, MaxSize>::Impl::GlobalPool* Allocator<Type, MaxSize>::Impl::globalPool_;
+#endif
 
 template <typename Type, int MaxSize>
 int Allocator<Type, MaxSize>::Impl::globalNodeCount_;
