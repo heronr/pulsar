@@ -39,17 +39,23 @@ if (NOT LIBRARY_VERSION)
     set(LIBRARY_VERSION ${PV})
 endif(NOT LIBRARY_VERSION)
 
+if (MSVC)
+    set(DLFCN_SRC dlfcn-win32/dlfcn.c)
+    set(DLFCN_DEP_LIBS psapi.lib)
+endif(MSVC)
 
-add_library(pulsarShared SHARED ${PULSAR_SOURCES} PulsarApi.pb.h PulsarApi.pb.cc)
+add_library(pulsarShared SHARED ${PULSAR_SOURCES} ${DLFCN_SRC} PulsarApi.pb.h PulsarApi.pb.cc)
 set_target_properties(pulsarShared PROPERTIES OUTPUT_NAME ${LIB_NAME} VERSION ${LIBRARY_VERSION})
-target_link_libraries(pulsarShared ${COMMON_LIBS})
+target_link_libraries(pulsarShared ${COMMON_LIBS} ${DLFCN_DEP_LIBS})
 
-add_library(pulsarStatic STATIC ${PULSAR_SOURCES} PulsarApi.pb.h PulsarApi.pb.cc)
+add_library(pulsarStatic STATIC ${PULSAR_SOURCES} ${DLFCN_SRC} PulsarApi.pb.h PulsarApi.pb.cc)
 set_target_properties(pulsarStatic PROPERTIES OUTPUT_NAME ${LIB_NAME} VERSION ${LIBRARY_VERSION})
 
 if (MSVC)
     target_compile_options(pulsarStatic PUBLIC /wd4244 /wd4267 /wd4018 /wd4715)
     target_compile_options(pulsarShared PUBLIC /wd4244 /wd4267 /wd4018 /wd4715)
+    target_include_directories(pulsarStatic PUBLIC dlfcn-win32)
+    target_include_directories(pulsarShared PUBLIC dlfcn-win32)
 endif()
 
 # When linking statically, install a libpulsar.a that contains all the
@@ -64,14 +70,15 @@ if (LINK_STATIC)
     endforeach()
 
     if (MSVC)
+        
     else()
-    add_custom_target(pulsarStaticWithDeps
-            ALL
-            BYPRODUCTS merged-library
-            COMMAND ./build-support/merge_archives.sh libpulsar.a $<TARGET_FILE:pulsarStatic> ${STATIC_LIBS}
-            DEPENDS pulsarStatic
-            WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
-    install(FILES ../merged-library/libpulsar.a DESTINATION lib)
+        add_custom_target(pulsarStaticWithDeps
+                ALL
+                BYPRODUCTS merged-library
+                COMMAND ./build-support/merge_archives.sh libpulsar.a $<TARGET_FILE:pulsarStatic> ${STATIC_LIBS}
+                DEPENDS pulsarStatic
+                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+        install(FILES ../merged-library/libpulsar.a DESTINATION lib)
     endif(MSVC)
 else()
     # Install regular libpulsar.a

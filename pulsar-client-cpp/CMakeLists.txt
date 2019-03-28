@@ -62,7 +62,7 @@ if (NOT MSVC)
 
     add_compile_options(-msse4.2 -mpclmul -Werror=switch -Wno-deprecated-declarations)
 else()
-    add_definitions(-DWIN32_LEAN_AND_MEAN -DNOGDI -D_WIN32_WINNT=0x0501)
+    add_definitions(-DWIN32_LEAN_AND_MEAN -DNOGDI -D_WIN32_WINNT=0x0501 -D_CRT_SECURE_NO_WARNINGS)
 endif(NOT MSVC)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -109,11 +109,11 @@ find_package(Boost REQUIRED COMPONENTS program_options regex system)
 
 find_package(ZLIB REQUIRED)
 
-find_package(ProtoBuf QUIET)
-if (NOT ProtoBuf_FOUND)
-    find_library(ProtoBuf_LIBRARIES protobuf-lite libprotobuf-lite)
-    find_path(ProtoBuf_INCLUDE_DIRS google/protobuf/stubs/common.h)
-endif (NOT ProtoBuf_FOUND)
+find_package(Protobuf QUIET)
+if (NOT Protobuf_FOUND)
+    find_library(Protobuf_LIBRARIES protobuf-lite libprotobuf-lite)
+    find_path(Protobuf_INCLUDE_DIRS google/protobuf/stubs/common.h)
+endif (NOT Protobuf_FOUND)
 
 find_package(CURL QUIET)
 if (NOT CURL_FOUND)
@@ -197,7 +197,7 @@ include_directories(
   ${OPENSSL_INCLUDE_DIR}
   ${ZLIB_INCLUDE_DIRS}
   ${CURL_INCLUDE_DIRS}
-  ${ProtoBuf_INCLUDE_DIRS}
+  ${Protobuf_INCLUDE_DIRS}
   ${LOG4CXX_INCLUDE_PATH}
   ${GTEST_INCLUDE_PATH}
   ${GMOCK_INCLUDE_PATH}
@@ -210,7 +210,7 @@ set(COMMON_LIBS
   ${CURL_LIBRARIES}
   ${OPENSSL_LIBRARIES}
   ${ZLIB_LIBRARIES}
-  ${ProtoBuf_LIBRARIES}
+  ${Protobuf_LIBRARIES}
   ${ADDITIONAL_LIBRARIES}
 )
 
