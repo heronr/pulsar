@@ -46,14 +46,12 @@ endif(MSVC)
 
 add_library(pulsarShared SHARED ${PULSAR_SOURCES} ${DLFCN_SRC} PulsarApi.pb.h PulsarApi.pb.cc)
 set_target_properties(pulsarShared PROPERTIES OUTPUT_NAME ${LIB_NAME} VERSION ${LIBRARY_VERSION})
-target_link_libraries(pulsarShared ${COMMON_LIBS} ${DLFCN_DEP_LIBS})
+target_link_libraries(pulsarShared ${COMMON_LIBS} ${DLFCN_DEP_LIBS} Boost::disable_autolinking)
 
 add_library(pulsarStatic STATIC ${PULSAR_SOURCES} ${DLFCN_SRC} PulsarApi.pb.h PulsarApi.pb.cc)
 set_target_properties(pulsarStatic PROPERTIES OUTPUT_NAME ${LIB_NAME} VERSION ${LIBRARY_VERSION})
 
 if (MSVC)
-    target_compile_options(pulsarStatic PUBLIC /wd4244 /wd4267 /wd4018 /wd4715)
-    target_compile_options(pulsarShared PUBLIC /wd4244 /wd4267 /wd4018 /wd4715)
     target_include_directories(pulsarStatic PUBLIC dlfcn-win32)
     target_include_directories(pulsarShared PUBLIC dlfcn-win32)
 endif()
@@ -64,13 +62,15 @@ if (LINK_STATIC)
     # Build a list of the requird .a libs to merge
     SET(STATIC_LIBS "")
     foreach (LIB IN LISTS COMMON_LIBS)
-        if (${LIB} MATCHES ".+\\.(a|lib)")
+        if (${LIB} MATCHES ".+\\.(a|lib)$")
             set(STATIC_LIBS "${STATIC_LIBS} ${LIB}")
         endif()
     endforeach()
 
     if (MSVC)
-        
+        add_library(pulsarStaticWithDeps STATIC ${PULSAR_SOURCES} ${DLFCN_SRC} PulsarApi.pb.h PulsarApi.pb.cc)
+        target_link_libraries(pulsarStaticWithDeps ${COMMON_LIBS})
+        install(TARGETS pulsarStaticWithDeps DESTINATION lib)
     else()
         add_custom_target(pulsarStaticWithDeps
                 ALL

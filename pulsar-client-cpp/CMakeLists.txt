@@ -62,7 +62,8 @@ if (NOT MSVC)
 
     add_compile_options(-msse4.2 -mpclmul -Werror=switch -Wno-deprecated-declarations)
 else()
-    add_definitions(-DWIN32_LEAN_AND_MEAN -DNOGDI -D_WIN32_WINNT=0x0501 -D_CRT_SECURE_NO_WARNINGS)
+    add_definitions(-DWIN32_LEAN_AND_MEAN -DNOGDI -D_WIN32_WINNT=0x0501 -D_CRT_SECURE_NO_WARNINGS -DCURL_STATICLIB)
+    add_compile_options(/wd4244 /wd4267 /wd4018 /wd4715)
 endif(NOT MSVC)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
@@ -220,6 +221,11 @@ if (NOT MSVC)
     dl
     pthread
     )
+else()
+    set(COMMON_LIBS
+    ${COMMON_LIBS} 
+    wldap32.lib
+    Normaliz.lib)
 endif()
 
 if (USE_LOG4CXX)
