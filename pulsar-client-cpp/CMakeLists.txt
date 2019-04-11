@@ -96,6 +96,8 @@ if (LINK_STATIC)
     if (NOT MSVC)
         set(CMAKE_FIND_LIBRARY_SUFFIXES .a)
     endif()
+    SET(Boost_USE_STATIC_LIBS   ON)
+    SET(OPENSSL_USE_STATIC_LIBS TRUE)
 else()
     # Link to shared libraries
     if (USE_LOG4CXX)
