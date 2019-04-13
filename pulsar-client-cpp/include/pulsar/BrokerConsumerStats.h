@@ -84,7 +84,7 @@ class PULSAR_PUBLIC BrokerConsumerStats {
     std::shared_ptr<BrokerConsumerStatsImplBase> getImpl() const;
 
     friend class PulsarWrapper;
-    friend std::ostream &operator<<(std::ostream &os, const BrokerConsumerStats &obj);
+    friend PULSAR_PUBLIC std::ostream &operator<<(std::ostream &os, const BrokerConsumerStats &obj);
 };
 typedef std::function<void(Result result, BrokerConsumerStats brokerConsumerStats)>
     BrokerConsumerStatsCallback;

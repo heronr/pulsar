@@ -147,8 +147,8 @@ class PULSAR_PUBLIC Message {
     friend class BatchAcknowledgementTracker;
     friend class PulsarWrapper;
 
-    friend std::ostream& operator<<(std::ostream& s, const StringMap& map);
-    friend std::ostream& operator<<(std::ostream& s, const Message& msg);
+    friend PULSAR_PUBLIC std::ostream& operator<<(std::ostream& s, const StringMap& map);
+    friend PULSAR_PUBLIC std::ostream& operator<<(std::ostream& s, const Message& msg);
 };
 }  // namespace pulsar
 

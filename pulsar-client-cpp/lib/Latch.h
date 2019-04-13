@@ -26,7 +26,7 @@
 
 namespace pulsar {
 
-PULSAR_PUBLIC class Latch {
+class PULSAR_PUBLIC Latch {
    public:
     Latch(int count);
 
