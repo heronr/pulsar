@@ -35,7 +35,7 @@
 
 #else
 
-#define PULSAR_PUBLIC __attribute__((visibility "default"))
+#define PULSAR_PUBLIC __attribute__((visibility("default")))
 
 #endif /*_WIN32*/
 
