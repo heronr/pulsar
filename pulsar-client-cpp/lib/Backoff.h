@@ -22,16 +22,13 @@
 #include <stdlib.h> /* srand, rand */
 #include <algorithm>
 #include <time.h> /* time */
-
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
+#include <pulsar/defines.h>
 
 namespace pulsar {
 
 typedef boost::posix_time::time_duration TimeDuration;
 
-class Backoff {
+class PULSAR_PUBLIC Backoff {
    public:
     Backoff(const TimeDuration&, const TimeDuration&, const TimeDuration&);
     TimeDuration next();
@@ -51,8 +48,5 @@ class Backoff {
 };
 }  // namespace pulsar
 
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 
 #endif  //_PULSAR_BACKOFF_HEADER_

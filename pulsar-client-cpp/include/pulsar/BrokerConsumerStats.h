@@ -19,6 +19,7 @@
 #ifndef PULSAR_CPP_BROKERCONSUMERSTATS_H
 #define PULSAR_CPP_BROKERCONSUMERSTATS_H
 
+#include <pulsar/defines.h>
 #include <string.h>
 #include <iostream>
 #include <pulsar/Result.h>
@@ -26,15 +27,12 @@
 #include <memory>
 #include <pulsar/ConsumerType.h>
 
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
 namespace pulsar {
 class BrokerConsumerStatsImplBase;
 class PulsarWrapper;
 
 /* @note: isValid() or getXXX() methods are not allowed on an invalid BrokerConsumerStats */
-class BrokerConsumerStats {
+class PULSAR_PUBLIC BrokerConsumerStats {
    private:
     std::shared_ptr<BrokerConsumerStatsImplBase> impl_;
 
@@ -91,9 +89,5 @@ class BrokerConsumerStats {
 typedef std::function<void(Result result, BrokerConsumerStats brokerConsumerStats)>
     BrokerConsumerStatsCallback;
 }  // namespace pulsar
-
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 
 #endif  // PULSAR_CPP_BROKERCONSUMERSTATS_H

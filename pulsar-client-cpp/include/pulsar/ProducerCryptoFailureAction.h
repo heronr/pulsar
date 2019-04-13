@@ -19,10 +19,6 @@
 #ifndef PRODUCERCRYPTOFAILUREACTION_H_
 #define PRODUCERCRYPTOFAILUREACTION_H_
 
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
-
 namespace pulsar {
 
 enum class ProducerCryptoFailureAction
@@ -32,9 +28,5 @@ enum class ProducerCryptoFailureAction
 };
 
 } /* namespace pulsar */
-
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 
 #endif /* PRODUCERCRYPTOFAILUREACTION_H_ */

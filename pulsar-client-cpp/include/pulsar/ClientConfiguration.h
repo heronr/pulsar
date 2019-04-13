@@ -19,16 +19,14 @@
 #ifndef PULSAR_CLIENTCONFIGURATION_H_
 #define PULSAR_CLIENTCONFIGURATION_H_
 
+#include <pulsar/defines.h>
 #include <pulsar/Authentication.h>
 #include <pulsar/Logger.h>
 
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
 namespace pulsar {
 class PulsarWrapper;
 struct ClientConfigurationImpl;
-class ClientConfiguration {
+class PULSAR_PUBLIC ClientConfiguration {
    public:
     ClientConfiguration();
     ~ClientConfiguration();
@@ -160,7 +158,4 @@ class ClientConfiguration {
 };
 }  // namespace pulsar
 
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 #endif /* PULSAR_CLIENTCONFIGURATION_H_ */

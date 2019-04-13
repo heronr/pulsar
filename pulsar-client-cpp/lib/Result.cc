@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+#include <pulsar/defines.h>
 #include <pulsar/Result.h>
 
 #include <iostream>
@@ -138,12 +139,5 @@ const char* pulsar::strResult(Result result) {
     return "UnknownErrorCode";
 }
 
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
+PULSAR_PUBLIC std::ostream& operator<<(std::ostream& s, Result result) { return s << strResult(result); }
 
-std::ostream& operator<<(std::ostream& s, Result result) { return s << strResult(result); }
-
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif

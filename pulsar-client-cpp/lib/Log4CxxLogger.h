@@ -19,17 +19,14 @@
 
 #pragma once
 
+#include <pulsar/defines.h>
 #include <pulsar/Logger.h>
 
 #ifdef USE_LOG4CXX
 
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
-
 namespace pulsar {
 
-class Log4CxxLoggerFactory : public LoggerFactory {
+class PULSAR_PUBLIC Log4CxxLoggerFactory : public LoggerFactory {
    public:
     static LoggerFactoryPtr create();
     static LoggerFactoryPtr create(const std::string& log4cxxConfFile);
@@ -37,9 +34,5 @@ class Log4CxxLoggerFactory : public LoggerFactory {
     Logger* getLogger(const std::string& fileName);
 };
 }  // namespace pulsar
-
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 
 #endif

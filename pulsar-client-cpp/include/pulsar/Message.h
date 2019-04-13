@@ -24,11 +24,8 @@
 
 #include <memory>
 
+#include <pulsar/defines.h>
 #include "MessageId.h"
-
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
 
 namespace pulsar {
 namespace proto {
@@ -42,7 +39,7 @@ class MessageBuilder;
 class MessageImpl;
 class PulsarWrapper;
 
-class Message {
+class PULSAR_PUBLIC Message {
    public:
     typedef std::map<std::string, std::string> StringMap;
 
@@ -155,7 +152,4 @@ class Message {
 };
 }  // namespace pulsar
 
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 #endif /* MESSAGE_HPP_ */

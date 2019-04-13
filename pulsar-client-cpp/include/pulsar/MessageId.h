@@ -23,16 +23,13 @@
 #include <stdint.h>
 #include <memory>
 #include <string>
-
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
+#include <pulsar/defines.h>
 
 namespace pulsar {
 
 class MessageIdImpl;
 
-class MessageId {
+class PULSAR_PUBLIC MessageId {
    public:
     MessageId& operator=(const MessageId&);
     MessageId();
@@ -102,9 +99,5 @@ class MessageId {
     MessageIdImplPtr impl_;
 };
 }  // namespace pulsar
-
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 
 #endif  // MESSAGE_ID_H

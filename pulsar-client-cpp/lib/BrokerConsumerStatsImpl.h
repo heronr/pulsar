@@ -21,16 +21,15 @@
 
 #include <string.h>
 #include <iostream>
+#include <pulsar/defines.h>
 #include <pulsar/Result.h>
 #include <functional>
 #include <boost/date_time/microsec_time_clock.hpp>
 #include <pulsar/BrokerConsumerStats.h>
 #include <lib/BrokerConsumerStatsImplBase.h>
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
+
 namespace pulsar {
-class BrokerConsumerStatsImpl : public BrokerConsumerStatsImplBase {
+class PULSAR_PUBLIC BrokerConsumerStatsImpl : public BrokerConsumerStatsImplBase {
    private:
     /** validTill_ - Stats will be valid till this time.*/
     boost::posix_time::ptime validTill_;
@@ -126,7 +125,5 @@ class BrokerConsumerStatsImpl : public BrokerConsumerStatsImplBase {
     static ConsumerType convertStringToConsumerType(const std::string& str);
 };
 }  // namespace pulsar
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
+
 #endif  // PULSAR_CPP_BROKERCONSUMERSTATSIMPL_H

@@ -22,16 +22,14 @@
 #include <string.h>
 #include <iostream>
 #include <vector>
+#include <pulsar/defines.h>
 #include <pulsar/Result.h>
 #include <functional>
 #include <boost/date_time/microsec_time_clock.hpp>
 #include <lib/BrokerConsumerStatsImpl.h>
 
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
 namespace pulsar {
-class MultiTopicsBrokerConsumerStatsImpl : public BrokerConsumerStatsImplBase {
+class PULSAR_PUBLIC MultiTopicsBrokerConsumerStatsImpl : public BrokerConsumerStatsImplBase {
    private:
     std::vector<BrokerConsumerStats> statsList_;
     static const std::string DELIMITER;
@@ -89,7 +87,5 @@ class MultiTopicsBrokerConsumerStatsImpl : public BrokerConsumerStatsImplBase {
 };
 typedef std::shared_ptr<MultiTopicsBrokerConsumerStatsImpl> MultiTopicsBrokerConsumerStatsPtr;
 }  // namespace pulsar
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
+
 #endif  // PULSAR_CPP_MULTITOPICSBROKERCONSUMERSTATSIMPL_H

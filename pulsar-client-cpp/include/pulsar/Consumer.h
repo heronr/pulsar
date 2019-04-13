@@ -20,11 +20,9 @@
 #define CONSUMER_HPP_
 
 #include <iostream>
+#include <pulsar/defines.h>
 #include <pulsar/BrokerConsumerStats.h>
 #include <pulsar/ConsumerConfiguration.h>
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
 
 namespace pulsar {
 class PulsarWrapper;
@@ -34,7 +32,7 @@ typedef std::shared_ptr<ConsumerImplBase> ConsumerImplBasePtr;
 /**
  *
  */
-class Consumer {
+class PULSAR_PUBLIC Consumer {
    public:
     /**
      * Construct an uninitialized consumer object
@@ -327,9 +325,5 @@ class Consumer {
     friend class ConsumerTest;
 };
 }  // namespace pulsar
-
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 
 #endif /* CONSUMER_HPP_ */

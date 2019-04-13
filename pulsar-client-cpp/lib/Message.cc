@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+#include <pulsar/defines.h>
 #include <pulsar/Message.h>
 #include <pulsar/MessageBuilder.h>
 
@@ -120,11 +121,7 @@ uint64_t Message::getPublishTimestamp() const { return impl_ ? impl_->getPublish
 
 uint64_t Message::getEventTimestamp() const { return impl_ ? impl_->getEventTimestamp() : 0ull; }
 
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
-
-std::ostream& operator<<(std::ostream& s, const Message::StringMap& map) {
+PULSAR_PUBLIC std::ostream& operator<<(std::ostream& s, const Message::StringMap& map) {
     // Output at most 10 elements -- appropriate if used for logging.
     s << '{';
 
@@ -146,7 +143,7 @@ std::ostream& operator<<(std::ostream& s, const Message::StringMap& map) {
     return s;
 }
 
-std::ostream& operator<<(std::ostream& s, const Message& msg) {
+PULSAR_PUBLIC std::ostream& operator<<(std::ostream& s, const Message& msg) {
     assert(msg.impl_.get());
     assert(msg.impl_->metadata.has_sequence_id());
     assert(msg.impl_->metadata.has_publish_time());
@@ -157,7 +154,4 @@ std::ostream& operator<<(std::ostream& s, const Message& msg) {
     return s;
 }
 
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 }  // namespace pulsar

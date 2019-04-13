@@ -21,6 +21,7 @@
 
 #include <functional>
 #include <memory>
+#include <pulsar/defines.h>
 #include <pulsar/Result.h>
 #include <pulsar/ConsumerType.h>
 #include <pulsar/Message.h>
@@ -29,9 +30,6 @@
 #include <pulsar/CryptoKeyReader.h>
 #include <pulsar/InitialPosition.h>
 
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
 namespace pulsar {
 
 class Consumer;
@@ -49,7 +47,7 @@ struct ConsumerConfigurationImpl;
 /**
  * Class specifying the configuration of a consumer.
  */
-class ConsumerConfiguration {
+class PULSAR_PUBLIC ConsumerConfiguration {
    public:
     ConsumerConfiguration();
     ~ConsumerConfiguration();
@@ -246,7 +244,4 @@ class ConsumerConfiguration {
     std::shared_ptr<ConsumerConfigurationImpl> impl_;
 };
 }  // namespace pulsar
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 #endif /* PULSAR_CONSUMERCONFIGURATION_H_ */

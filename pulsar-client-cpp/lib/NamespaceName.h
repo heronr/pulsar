@@ -19,17 +19,15 @@
 #ifndef _PULSAR_NAMESPACE_NAME_HEADER_
 #define _PULSAR_NAMESPACE_NAME_HEADER_
 
+#include <pulsar/defines.h>
 #include "ServiceUnitId.h"
 
 #include <memory>
 #include <string>
 
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
 namespace pulsar {
 
-class NamespaceName : public ServiceUnitId {
+class PULSAR_PUBLIC NamespaceName : public ServiceUnitId {
    public:
     std::shared_ptr<NamespaceName> getNamespaceObject();
     std::string getProperty();
@@ -57,8 +55,5 @@ class NamespaceName : public ServiceUnitId {
 typedef std::shared_ptr<NamespaceName> NamespaceNamePtr;
 
 }  // namespace pulsar
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 
 #endif

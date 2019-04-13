@@ -19,12 +19,9 @@
 #ifndef PULSAR_READER_HPP_
 #define PULSAR_READER_HPP_
 
+#include <pulsar/defines.h>
 #include <pulsar/Message.h>
 #include <pulsar/ReaderConfiguration.h>
-
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
 
 namespace pulsar {
 class PulsarWrapper;
@@ -36,7 +33,7 @@ typedef std::function<void(Result result, bool hasMessageAvailable)> HasMessageA
 /**
  * A Reader can be used to scan through all the messages currently available in a topic.
  */
-class Reader {
+class PULSAR_PUBLIC Reader {
    public:
     /**
      * Construct an uninitialized reader object
@@ -96,9 +93,5 @@ class Reader {
     friend class ReaderTest;
 };
 }  // namespace pulsar
-
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 
 #endif /* PULSAR_READER_HPP_ */

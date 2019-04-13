@@ -20,14 +20,11 @@
 
 #include <memory>
 #include <string>
-
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
+#include <pulsar/defines.h>
 
 namespace pulsar {
 
-class Logger {
+class PULSAR_PUBLIC Logger {
    public:
     enum Level
     {
@@ -44,7 +41,7 @@ class Logger {
     virtual void log(Level level, int line, const std::string& message) = 0;
 };
 
-class LoggerFactory {
+class PULSAR_PUBLIC LoggerFactory {
    public:
     virtual ~LoggerFactory() {}
 
@@ -53,6 +50,4 @@ class LoggerFactory {
 
 typedef std::shared_ptr<LoggerFactory> LoggerFactoryPtr;
 }  // namespace pulsar
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
+

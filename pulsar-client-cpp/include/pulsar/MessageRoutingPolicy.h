@@ -19,14 +19,11 @@
 #ifndef PULSAR_MESSAGE_ROUTING_POLICY_HEADER_
 #define PULSAR_MESSAGE_ROUTING_POLICY_HEADER_
 
+#include <pulsar/defines.h>
 #include <pulsar/DeprecatedException.h>
 #include <pulsar/Message.h>
 #include <pulsar/TopicMetadata.h>
 #include <memory>
-
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
 
 /*
  * Implement this interface to define custom policy giving message to
@@ -34,7 +31,7 @@
  */
 namespace pulsar {
 
-class MessageRoutingPolicy {
+class PULSAR_PUBLIC MessageRoutingPolicy {
    public:
     virtual ~MessageRoutingPolicy() {}
 
@@ -54,9 +51,5 @@ class MessageRoutingPolicy {
 
 typedef std::shared_ptr<MessageRoutingPolicy> MessageRoutingPolicyPtr;
 }  // namespace pulsar
-
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 
 #endif  // PULSAR_MESSAGE_ROUTING_POLICY_HEADER_

@@ -23,6 +23,7 @@
 #include <sstream>
 #include <memory>
 
+#include <pulsar/defines.h>
 #include <pulsar/Logger.h>
 
 namespace pulsar {
@@ -81,11 +82,7 @@ namespace pulsar {
         }                                                             \
     }
 
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
-
-class LogUtils {
+class PULSAR_PUBLIC LogUtils {
    public:
     static void init(const std::string& logConfFilePath);
 
@@ -96,7 +93,4 @@ class LogUtils {
     static std::string getLoggerName(const std::string& path);
 };
 
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 }  // namespace pulsar

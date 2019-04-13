@@ -19,17 +19,15 @@
 #ifndef BOOST_HASH_HPP_
 #define BOOST_HASH_HPP_
 
+#include <pulsar/defines.h>
 #include "Hash.h"
 
 #include <cstdint>
 #include <string>
 #include <boost/functional/hash.hpp>
 
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
 namespace pulsar {
-class BoostHash : public Hash {
+class PULSAR_PUBLIC BoostHash : public Hash {
    public:
     BoostHash();
     int32_t makeHash(const std::string &key);
@@ -38,7 +36,5 @@ class BoostHash : public Hash {
     boost::hash<std::string> hash;
 };
 }  // namespace pulsar
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
+
 #endif /* BOOST_HASH_HPP_ */

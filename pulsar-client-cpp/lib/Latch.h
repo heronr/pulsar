@@ -22,14 +22,11 @@
 #include <memory>
 #include <mutex>
 #include <condition_variable>
-
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
+#include <pulsar/defines.h>
 
 namespace pulsar {
 
-class Latch {
+PULSAR_PUBLIC class Latch {
    public:
     Latch(int count);
 
@@ -65,9 +62,5 @@ class Latch {
 };
 typedef std::shared_ptr<Latch> LatchPtr;
 } /* namespace pulsar */
-
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 
 #endif /* LIB_LATCH_H_ */

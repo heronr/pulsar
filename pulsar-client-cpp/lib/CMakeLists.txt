@@ -50,6 +50,7 @@ target_link_libraries(pulsarShared ${COMMON_LIBS} ${DLFCN_DEP_LIBS} Boost::disab
 
 add_library(pulsarStatic STATIC ${PULSAR_SOURCES} ${DLFCN_SRC} PulsarApi.pb.h PulsarApi.pb.cc)
 set_target_properties(pulsarStatic PROPERTIES OUTPUT_NAME ${LIB_NAME} VERSION ${LIBRARY_VERSION})
+target_compile_definitions(pulsarStatic PUBLIC PULSAR_STATIC)
 
 if (MSVC)
     target_include_directories(pulsarStatic PUBLIC dlfcn-win32)

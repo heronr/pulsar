@@ -19,17 +19,13 @@
 #ifndef LIB_COMPRESSIONCODEC_H_
 #define LIB_COMPRESSIONCODEC_H_
 
+#include <pulsar/defines.h>
 #include <pulsar/Producer.h>
 
 #include "SharedBuffer.h"
 #include "PulsarApi.pb.h"
 
 #include <map>
-
-// Make symbol visible to unit tests
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
 
 using namespace pulsar;
 namespace pulsar {
@@ -40,7 +36,7 @@ class CompressionCodecLZ4;
 class CompressionCodecZLib;
 class CompressionCodecZstd;
 
-class CompressionCodecProvider {
+class PULSAR_PUBLIC CompressionCodecProvider {
    public:
     static CompressionType convertType(proto::CompressionType type);
     static proto::CompressionType convertType(CompressionType type);
@@ -54,7 +50,7 @@ class CompressionCodecProvider {
     static CompressionCodecZstd compressionCodecZstd_;
 };
 
-class CompressionCodec {
+class PULSAR_PUBLIC CompressionCodec {
    public:
     virtual ~CompressionCodec() {}
 
@@ -83,16 +79,12 @@ class CompressionCodec {
     virtual bool decode(const SharedBuffer& encoded, uint32_t uncompressedSize, SharedBuffer& decoded) = 0;
 };
 
-class CompressionCodecNone : public CompressionCodec {
+class PULSAR_PUBLIC CompressionCodecNone : public CompressionCodec {
    public:
     SharedBuffer encode(const SharedBuffer& raw);
 
     bool decode(const SharedBuffer& encoded, uint32_t uncompressedSize, SharedBuffer& decoded);
 };
 }  // namespace pulsar
-
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 
 #endif /* LIB_COMPRESSIONCODEC_H_ */

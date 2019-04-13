@@ -21,13 +21,10 @@
 
 #include <stdexcept>
 #include <string>
-
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
+#include <pulsar/defines.h>
 
 namespace pulsar {
-class DeprecatedException : public std::runtime_error {
+class PULSAR_PUBLIC DeprecatedException : public std::runtime_error {
    public:
     explicit DeprecatedException(const std::string& __arg);
 
@@ -35,9 +32,5 @@ class DeprecatedException : public std::runtime_error {
     static const std::string message_prefix;
 };
 }  // namespace pulsar
-
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 
 #endif  // DEPRECATED_EXCEPTION_HPP_

@@ -21,13 +21,11 @@
 
 #include <functional>
 #include <memory>
+#include <pulsar/defines.h>
 #include <pulsar/Result.h>
 #include <pulsar/Message.h>
 #include <pulsar/Schema.h>
 
-#ifdef __GNUC__
-#pragma GCC visibility push(default)
-#endif
 namespace pulsar {
 
 class Reader;
@@ -44,7 +42,7 @@ struct ReaderConfigurationImpl;
 /**
  * Class specifying the configuration of a consumer.
  */
-class ReaderConfiguration {
+class PULSAR_PUBLIC ReaderConfiguration {
    public:
     ReaderConfiguration();
     ~ReaderConfiguration();
@@ -111,7 +109,4 @@ class ReaderConfiguration {
     std::shared_ptr<ReaderConfigurationImpl> impl_;
 };
 }  // namespace pulsar
-#ifdef __GNUC__
-#pragma GCC visibility pop
-#endif
 #endif /* PULSAR_READER_CONFIGURATION_H_ */
