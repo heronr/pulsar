@@ -19,7 +19,7 @@
 
 file(GLOB PULSAR_SOURCES *.cc *.h lz4/*.c lz4/*.h checksum/*.cc checksum/*.h stats/*.cc stats/*.h c/*.cc c/*.h auth/*.cc auth/*.h auth/athenz/*.cc auth/athenz/*.h)
 
-execute_process(COMMAND python ${CMAKE_CURRENT_SOURCE_DIR}/../../src/get-project-version.py OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE PV)
+execute_process(COMMAND python ${CMAKE_SOURCE_DIR}/../src/get-project-version.py OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE PV)
 set (CMAKE_CXX_FLAGS " ${CMAKE_CXX_FLAGS} -D_PULSAR_VERSION_=\\\"${PV}\\\"")
 
 if (NOT PROTOC_PATH)
@@ -28,7 +28,7 @@ endif()
 # Protobuf generation is only supported natively starting from CMake 3.8
 # Using custom command for now
 ADD_CUSTOM_COMMAND(
-         OUTPUT PulsarApi.pb.h PulsarApi.pb.cc
+         OUTPUT ${CMAKE_SOURCE_DIR}/lib/PulsarApi.pb.h ${CMAKE_SOURCE_DIR}/lib/PulsarApi.pb.cc
          COMMAND ${PROTOC_PATH} -I ../../pulsar-common/src/main/proto ../../pulsar-common/src/main/proto/PulsarApi.proto --cpp_out=${CMAKE_SOURCE_DIR}/lib
          DEPENDS
          ../../pulsar-common/src/main/proto/PulsarApi.proto
