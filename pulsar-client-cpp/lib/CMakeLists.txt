@@ -52,7 +52,7 @@ endif()
 
 add_library(pulsarShared SHARED ${PULSAR_SOURCES} ${DLFCN_SRC} PulsarApi.pb.h PulsarApi.pb.cc)
 set_target_properties(pulsarShared PROPERTIES OUTPUT_NAME ${LIB_NAME_SHARED} VERSION ${LIBRARY_VERSION})
-target_link_libraries(pulsarShared ${COMMON_LIBS} ${DLFCN_DEP_LIBS} Boost::disable_autolinking)
+target_link_libraries(pulsarShared ${COMMON_LIBS} ${DLFCN_DEP_LIBS})
 
 add_library(pulsarStatic STATIC ${PULSAR_SOURCES} ${DLFCN_SRC} PulsarApi.pb.h PulsarApi.pb.cc)
 set_target_properties(pulsarStatic PROPERTIES OUTPUT_NAME ${LIB_NAME} VERSION ${LIBRARY_VERSION})
